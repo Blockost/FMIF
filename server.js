@@ -39,7 +39,7 @@ io.on('connection', (socket) => {
 
     // When the player moves
     socket.on('move', (data) => {
-        console.log(JSON.stringify(data));
+        //console.log(JSON.stringify(data));
         socket.broadcast.emit('move', data);
     });
 
@@ -48,7 +48,7 @@ io.on('connection', (socket) => {
         console.log(socket.nickname + ' shot !!');
         console.log(JSON.stringify(data));
         // Broadcast to all players (including himself => server validation for shooting)
-        //io.sockets.emit('shot', data);
+        io.sockets.emit('shot_confirmed', data);
     });
 
     // Remove the player from the list on disconnection

@@ -2,6 +2,9 @@
  * Created by blockost on 28/05/16.
  */
 
+//TODO Créer le world côté serveur pour qu'il soit commun à tours les joueurs.
+// Ici, chacun a sa propre instanne du world (c'est pas très onmine tous  ça !!
+
 define(['three', 'materials', 'scene'], (THREE, materials, scene) => {
 
     var world = {

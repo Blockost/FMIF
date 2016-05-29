@@ -1,6 +1,6 @@
-/********************************/
-
-
+/**
+ * Main file: game logic
+ */
 define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls', 'raycaster', 'world', 'intersects', 'globals', 'keyboardEvents', 'keyboardActions', 'communicator'],
     (THREE, camera, scene, renderer, container, light, controls, rays, world, intersects, globals, keyboardEvents, keyboardActions, COMM) => {
 
@@ -13,7 +13,7 @@ define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls'
                 world.createFloor();
                 world.createObjects();
 
-                COMM.initCommunication();
+                COMM.initReceiver();
 
             },
             animate: () => {
@@ -96,12 +96,7 @@ define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls'
                     /**
                      * Send to the server the coord
                      */
-                    /*socket.emit('move', {
-                     id: controls.getObject().id,
-                     x: controls.getObject().position.x,
-                     y: controls.getObject().position.y,
-                     z: controls.getObject().position.z,
-                     });*/
+                    COMM.emitter.sendPosition(controls);
 
                     /*var obj_intersects = arr_intersects.reduce(
                      (previousValue, currentValue, currentIndex, array) => {
@@ -110,10 +105,7 @@ define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls'
                      }, {});*/
 
                     // Intersects need to be an object {"1", value1, "2", value2, etc...}
-                    //socket.emit('shot', {data: "MyData"});
-
-                    //setTimeout(getBulletIntersections, snd_gunShot_MP3.duration*1000);*/
-
+                    
 
                 }
                 renderer.render(scene, camera);

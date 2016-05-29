@@ -5,7 +5,7 @@
 var snd_gunShot_WAV = new Audio("/static/game_design/sounds/Gun_Shot.wav");
 var snd_gunShot_MP3 = new Audio("/static/game_design/sounds/Gun_Shot.mp3");
 
-define(['camera', 'intersects', 'world'], (camera, intersects, world) => {
+define(['camera', 'intersects', 'world', 'communicator'], (camera, intersects, world, COMM) => {
 
     var mouseActions = {
         fire: () => {
@@ -29,9 +29,8 @@ define(['camera', 'intersects', 'world'], (camera, intersects, world) => {
 
             if (arr_intersects.length > 0) {
                 for (var i = 0; i < arr_intersects.length; i++)
-                    arr_intersects[i].object.material.color.setHex(0x000000);
+                    COMM.emitter.fire(arr_intersects[i].object.id);
             }
-
         },
 
         resetAudioFile: (audioFile) => {
