@@ -1,0 +1,11 @@
+{
+  "name": "FMIF",
+  "version": "0.0.1",
+  "description": "Online game in WebGL (using threejs) and socket.io communication",
+  "dependencies": {
+    "express": "^4.13.4",
+    "requirejs": "^2.2.0",
+    "socket.io": "^1.4.6",
+    "three": "^0.76.1"
+  }
+}
