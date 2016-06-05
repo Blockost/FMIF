@@ -27,6 +27,9 @@ define(['camera', 'intersects', 'world', 'communicator'], (camera, intersects, w
 
             var arr_intersects = intersects.getBulletIntersections(world.objects);
 
+            /**
+             * Emit hitted blocks
+             */
             if (arr_intersects.length > 0) {
                 for (var i = 0; i < arr_intersects.length; i++)
                     COMM.emitter.fire(arr_intersects[i].object.id);

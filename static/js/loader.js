@@ -11,9 +11,10 @@ requirejs.config({
         'PointerLockControls': {deps: ['_THREE'], exports: 'THREE'},
     },
     paths: {
-        _THREE: '../../node_modules/three/three.min',
+        _THREE: '../../node_modules/three/three',
         PointerLockControls: '../../node_modules/three/examples/js/controls/PointerLockControls',
-        socketIO: '../../node_modules/socket.io/node_modules/socket.io-client/socket.io'
+        socketIO: '../../node_modules/socket.io/node_modules/socket.io-client/socket.io',
+        jquery: '../../node_modules/jquery/dist/jquery.min'
     }
 });
 

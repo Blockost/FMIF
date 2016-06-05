@@ -14,6 +14,13 @@ define(['socketIO', 'world'], (io, world) => {
          * Handler for incoming message
          */
         initReceiver: () => {
+
+            socket.on('worldUpdates', (updates) => {
+                console.log(JSON.stringify(updates));
+                if (updates.size == 0)
+                    console.log('NO UPDATES TO APPLY');
+            });
+
             socket.on('new_player', (player) => {
 
                 /*//Create an object which represents the player
@@ -45,6 +52,9 @@ define(['socketIO', 'world'], (io, world) => {
         emitter: {
             sendPosition: (controls) => {
                 socket.emit('move', {
+                    /**
+                     * Change id = controls.id to player.id
+                     */
                     id: controls.getObject().id,
                     x: controls.getObject().position.x,
                     y: controls.getObject().position.y,

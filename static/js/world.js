@@ -2,10 +2,9 @@
  * Created by blockost on 28/05/16.
  */
 
-//TODO Créer le world côté serveur pour qu'il soit commun à tours les joueurs.
-// Ici, chacun a sa propre instanne du world (c'est pas très onmine tous  ça !!
+//TODO @See server.js -> worldUpdates event
 
-define(['three', 'materials', 'scene'], (THREE, materials, scene) => {
+define(['jquery', 'three', 'materials', 'scene'], ($, THREE, materials, scene) => {
 
     var world = {
 
@@ -31,15 +30,20 @@ define(['three', 'materials', 'scene'], (THREE, materials, scene) => {
             }
 
 
-            var mesh = new THREE.Mesh(geometry, materials.basic);
-            mesh.type = "Floor";
-            mesh.id = -1;
-            scene.add(mesh);
+            var floor = new THREE.Mesh(geometry, materials.basic);
+            floor.type = "Floor";
+            floor.id = -1;
+            scene.add(floor);
         },
 
         createObjects: () => {
+            //TODO Reduce complexity of the scene: Phong material is so freaking greedy !
+            /**
+             * @See -> https://www.airtightinteractive.com/2015/01/building-a-60fps-webgl-game-on-mobile/
+             */
             var geometry = new THREE.BoxGeometry(20, 20, 20);
             var mesh, material;
+
 
             for (var i = 0, l = geometry.faces.length; i < l; i++) {
                 var face = geometry.faces[i];
@@ -52,14 +56,32 @@ define(['three', 'materials', 'scene'], (THREE, materials, scene) => {
             for (var i = 0; i < 500; i++) {
                 material = materials.phong.clone();
                 mesh = new THREE.Mesh(geometry, material);
-                mesh.position.x = Math.floor(Math.random() * 20 - 10) * 20;
-                mesh.position.y = Math.floor(Math.random() * 20) * 20 + 10;
-                mesh.position.z = Math.floor(Math.random() * 20 - 10) * 20;
+                mesh.position.x = Math.floor(i * 20 / 500 * 20 - 10) * 20;
+                mesh.position.y = Math.floor(i * 20 / 500 * 20) * 20 + 10;
+                mesh.position.z = Math.floor(i * 20 / 500 * 20 - 10) * 20;
                 mesh.id = i;
                 material.color.setHSL(Math.random() * 0.2 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
                 scene.add(mesh);
                 world.objects.push(mesh);
             }
+        },
+
+        /**
+         * Update is defined as a member function of the world object
+         * to call it to reload the world for exemple (future improv)
+         */
+        update: () => {
+            $.get('getWorldUpdates', (data) => {
+                console.log('server sent : ');
+                console.log(data);
+                data.forEach((_id) => {
+                    var obj = world.objects.filter((obj) => {
+                        return obj.id == _id;
+                    });
+                    console.log(obj);
+                    obj[0].material.color.setHex(0x000000);
+                });
+            });
         }
     };
 

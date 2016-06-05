@@ -1,8 +1,8 @@
 /**
  * Main file: game logic
  */
-define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls', 'raycaster', 'world', 'intersects', 'globals', 'keyboardEvents', 'keyboardActions', 'communicator'],
-    (THREE, camera, scene, renderer, container, light, controls, rays, world, intersects, globals, keyboardEvents, keyboardActions, COMM) => {
+define(['jquery', 'three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls', 'raycaster', 'world', 'intersects', 'globals', 'keyboardEvents', 'keyboardActions', 'communicator'],
+    ($, THREE, camera, scene, renderer, container, light, controls, rays, world, intersects, globals, keyboardEvents, keyboardActions, COMM) => {
 
 
         var app = {
@@ -13,6 +13,9 @@ define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls'
                 world.createFloor();
                 world.createObjects();
 
+                // Retrieve the changes applied by the players
+                world.update();
+                
                 COMM.initReceiver();
 
             },
@@ -105,7 +108,7 @@ define(['three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls'
                      }, {});*/
 
                     // Intersects need to be an object {"1", value1, "2", value2, etc...}
-                    
+
 
                 }
                 renderer.render(scene, camera);
