@@ -19,7 +19,7 @@ requirejs.config({
 });
 
 // Start the app
-requirejs(['lib/pointerlockAPI', 'app'], (pointerLock, app) => {
+requirejs(['pointerlockAPI', 'app'], (pointerLock, app) => {
     if (pointerLock.canLock()) {
         pointerLock.initLocker();
         app.init();

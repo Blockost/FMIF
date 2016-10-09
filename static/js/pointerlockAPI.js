@@ -9,10 +9,9 @@ define(['mouseEvents', 'controls'], (mouseEvents, controls) => {
 
     var pointerLock = {
         canLock: () => {
-            return 'mozPointerLockElement' in document;
-            /*('pointerLockElement' in document ||
-             'mozPointerLockElement' in document ||
-             'webkitPointerLockElement' in document);*/
+            return ('pointerLockElement' in document ||
+            'mozPointerLockElement' in document ||
+            'webkitPointerLockElement' in document);
         },
 
         initLocker: () => {
