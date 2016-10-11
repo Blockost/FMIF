@@ -12,6 +12,7 @@ define(['jquery', 'three', 'camera', 'scene', 'renderer', 'container', 'light', 
                 keyboardEvents.attachEventListeners();
                 world.createFloor();
                 world.createObjects();
+                world.createGameGUI();
 
                 // Retrieve the changes applied by the players
                 world.update();

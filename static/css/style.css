@@ -42,19 +42,6 @@ body {
     font-style: italic;
 }
 
-#sight {
-    position: absolute;
-    width: auto;
-    height: auto;
-    visibility: hidden;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
 a {
     text-decoration: none;
     color: white;

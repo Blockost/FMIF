@@ -4,7 +4,7 @@
 
 //TODO @See server.js -> worldUpdates event
 
-define(['jquery', 'three', 'materials', 'scene'], ($, THREE, materials, scene) => {
+define(['jquery', 'three', 'materials', 'scene', 'camera'], ($, THREE, materials, scene, camera) => {
 
     var world = {
 
@@ -64,6 +64,15 @@ define(['jquery', 'three', 'materials', 'scene'], ($, THREE, materials, scene) =
                 scene.add(mesh);
                 world.objects.push(mesh);
             }
+        },
+
+        createGameGUI: () => {
+            var map = new THREE.TextureLoader().load("/static/game_design/sprites/crosshair.png");
+            var material = new THREE.SpriteMaterial({map: map});
+            var sprite = new THREE.Sprite(material);
+            sprite.position.z = -10;
+            scene.add(sprite);
+            camera.add(sprite);
         },
 
         /**

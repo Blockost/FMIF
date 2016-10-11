@@ -2,7 +2,6 @@
 
 var blocker = document.getElementById("blocker");
 var container = document.getElementById("container");
-var sight = document.getElementById("sight");
 
 define(['mouseEvents', 'controls'], (mouseEvents, controls) => {
     // Create an object which will hold the logic of the pointerLock API
@@ -19,19 +18,17 @@ define(['mouseEvents', 'controls'], (mouseEvents, controls) => {
             var element = document.body;
             var pointerlockchange = () => {
                 if (document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element) {
-                    //console.log("PointerLock enabled");
+                    /* PointerLock enabled */
                     controls.enabled = true;
                     blocker.style.visibility = "hidden";
                     container.style.visibility = "hidden";
-                    sight.style.visibility = "visible";
                     window.addEventListener("mousedown", mouseEvents.onMouseDown, false);
                     window.addEventListener("mouseup", mouseEvents.onMouseUp, false);
                 } else {
-                    //console.log("PointerLock disabled");
+                    /* PointerLock disabled */
+                    controls.enabled = false;
                     blocker.style.visibility = "visible";
                     container.style.visibility = "visible";
-                    sight.style.visibility = "hidden";
-                    controls.enabled = false;
                     window.removeEventListener("mousedown", mouseEvents.onMouseDown);
                     window.removeEventListener("mouseup", mouseEvents.onMouseUp);
                 }
