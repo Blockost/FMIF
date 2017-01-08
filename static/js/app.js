@@ -1,8 +1,10 @@
 /**
  * Main file: game logic
  */
-define(['jquery', 'three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls', 'raycaster', 'world', 'intersects', 'globals', 'keyboardEvents', 'keyboardActions', 'communicator'],
-    ($, THREE, camera, scene, renderer, container, light, controls, rays, world, intersects, globals, keyboardEvents, keyboardActions, COMM) => {
+define(['jquery', 'three', 'camera', 'scene', 'renderer', 'container', 'light', 'controls', 'raycaster', 'world',
+    'intersects', 'globals', 'keyboardEvents', 'keyboardActions', 'communicator', 'sandbox'],
+    ($, THREE, camera, scene, renderer, container, light, controls, rays, world, intersects, globals,
+     keyboardEvents, keyboardActions, COMM, sandbox) => {
 
 
         var app = {
@@ -14,13 +16,16 @@ define(['jquery', 'three', 'camera', 'scene', 'renderer', 'container', 'light', 
                 world.createObjects();
                 world.createGameGUI();
 
+                /* Play around a little bit! :D */
+                sandbox.buildSandCastles();
+
                 // Retrieve the changes applied by the players
                 world.update();
                 
                 COMM.initReceiver();
 
             },
-            animate: () => {
+            () => {
                 // Loop
                 requestAnimationFrame(app.animate);
 
@@ -112,15 +117,14 @@ define(['jquery', 'three', 'camera', 'scene', 'renderer', 'container', 'light', 
 
 
                 }
+                THREE.MorphAnimation;
                 renderer.render(scene, camera);
             }
 
-        };
-
-
-        return app;
+}
+return app;
     }
-);
+)
 
 
 

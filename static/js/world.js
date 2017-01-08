@@ -36,7 +36,7 @@ define(['jquery', 'three', 'materials', 'scene', 'camera'], ($, THREE, materials
             scene.add(floor);
         },
 
-        createObjects: () => {
+        () => {
             //TODO Reduce complexity of the scene: Phong material is so freaking greedy !
             /**
              * @See -> https://www.airtightinteractive.com/2015/01/building-a-60fps-webgl-game-on-mobile/
@@ -66,34 +66,42 @@ define(['jquery', 'three', 'materials', 'scene', 'camera'], ($, THREE, materials
             }
         },
 
-        createGameGUI: () => {
-            var map = new THREE.TextureLoader().load("/static/game_design/sprites/crosshair.png");
-            var material = new THREE.SpriteMaterial({map: map});
-            var sprite = new THREE.Sprite(material);
-            sprite.position.z = -10;
-            scene.add(sprite);
-            camera.add(sprite);
+        () => {
+            var textureLoader = new THREE.TextureLoader();
+
+            // Load weapon crosshair (reticle)
+            textureLoader.load("/static/game_design/sprites/crosshair.png", (texture) => {
+                var crosshair = new THREE.Sprite(new THREE.SpriteMaterial({map: texture}));
+                crosshair.position.z = -8;
+                scene.add(crosshair);
+                camera.add(crosshair);
+})
+},
+
+        () => {
+            // Load player texture and model
+            // Add it to the scene so it can be rendered
+                // Add it finally  to camera (because the camera IS the player in FPS games)
         },
 
         /**
          * Update is defined as a member function of the world object
          * to call it to reload the world for exemple (future improv)
          */
-        update: () => {
+        () => {
             $.get('getWorldUpdates', (data) => {
                 console.log('server sent : ');
                 console.log(data);
                 data.forEach((_id) => {
                     var obj = world.objects.filter((obj) => {
                         return obj.id == _id;
-                    });
-                    console.log(obj);
+})
+    console.log(obj);
                     obj[0].material.color.setHex(0x000000);
-                });
-            });
-        }
-    };
-
-    return world;
-});
+})
+})
+}
+}
+return world;
+})
 

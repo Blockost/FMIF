@@ -22,33 +22,3 @@ var clickOnBlockerEventListener = function () {
     }
 };
 blocker.addEventListener('click', clickOnBlockerEventListener, false);
-
-
-/******** LOADING JSON OBJECTS ********/
-
-// instantiate a loader
-var loader = new THREE.JSONLoader();
-
-// load a resource
-loader.load(
-    // resource URL
-    "/static/game_design/models/animated/animals/cow.js",
-    // Function when resource is loaded
-    function (geometry, materials) {
-        var material = new THREE.MeshFaceMaterial(materials);
-        var object = new THREE.Mesh(geometry, material);
-        scene.add(object);
-        //objects.push(object);
-    }
-);
-
-
-// ??? Je ne sais pas ce que ça fait, sérieux (23/01/16) !
-/*geometry = new THREE.Geometry();
- var vector3 = new THREE.Vector3();
- geometry.vertices.push(vector3.copy(controls.getObject().position));
- geometry.vertices.push(new THREE.Vector3(0,0,-100));
-
- material = new THREE.LineBasicMaterial({color: 0x0000ff});
- var line = new THREE.Line(geometry, material);
- scene.add(line);*/
