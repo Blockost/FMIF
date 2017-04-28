@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "Online game in WebGL (using threejs) and socket.io communication",
   "author": "Simon ESPIGOLE",
+  "license": "AGPL-3.0+",
   "dependencies": {
     "express": "^4.13.4",
     "requirejs": "^2.2.0",
